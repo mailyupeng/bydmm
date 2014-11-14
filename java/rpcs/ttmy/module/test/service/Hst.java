@@ -7,7 +7,7 @@ public class Hst implements ITs {
 
 	@Override
 	public String xx() {
-		return "ab";
+		return "abcd";
 	}
 
 }
