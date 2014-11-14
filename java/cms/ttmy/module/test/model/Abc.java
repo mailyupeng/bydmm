@@ -1,4 +1,4 @@
-package ttmy.module.test.domain;
+package ttmy.module.test.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
