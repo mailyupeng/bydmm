@@ -22,10 +22,6 @@ import org.hibernate.metadata.CollectionMetadata;
 import org.hibernate.stat.Statistics;
 
 public class SessionFactoryAdapter implements SessionFactory {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -43,11 +39,11 @@ public class SessionFactoryAdapter implements SessionFactory {
 	}
 
 	@Override
-	public void evict(Class arg0) throws HibernateException {
+	public void evict(@SuppressWarnings("rawtypes") Class arg0) throws HibernateException {
 	}
 
 	@Override
-	public void evict(Class arg0, Serializable arg1) throws HibernateException {
+	public void evict(@SuppressWarnings("rawtypes") Class arg0, Serializable arg1) throws HibernateException {
 	}
 
 	@Override
@@ -79,6 +75,7 @@ public class SessionFactoryAdapter implements SessionFactory {
 		return null;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Map getAllCollectionMetadata() {
 		return null;
@@ -90,7 +87,7 @@ public class SessionFactoryAdapter implements SessionFactory {
 	}
 
 	@Override
-	public ClassMetadata getClassMetadata(Class arg0) {
+	public ClassMetadata getClassMetadata(@SuppressWarnings("rawtypes") Class arg0) {
 		return null;
 	}
 
@@ -109,6 +106,7 @@ public class SessionFactoryAdapter implements SessionFactory {
 		return null;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Set getDefinedFilterNames() {
 		return null;
