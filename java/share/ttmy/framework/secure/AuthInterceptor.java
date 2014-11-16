@@ -9,6 +9,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import ttmy.framework.context.UserContext;
+import ttmy.framework.core.model.IModule;
+import ttmy.framework.core.model.IRole;
 
 public class AuthInterceptor implements HandlerInterceptor {
 
@@ -34,13 +36,15 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		if (uncheckedURLs.contains(request.getServletPath()))
 			return true;
-		else if (UserContext.isLogin())
-			return true;
-		else {
-			response.sendRedirect("loginPage.htm");
-			return false;
-//			return true;
+		else if (UserContext.isLogin()) {
+			IRole role = UserContext.getCurrentUser().getCurrentRole();
+			for (IModule module : role.getAuthModules()) {
+				if (module.getUrl() != null && module.getUrl().equals(request.getServletPath()))
+					return true;
+			}
 		}
+		response.sendRedirect("loginPage.htm");
+		return false;
+		// return true;
 	}
-
 }

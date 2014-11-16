@@ -1,4 +1,4 @@
-package ttmy.framework.core.module;
+package ttmy.framework.core.model;
 
 import java.util.List;
 

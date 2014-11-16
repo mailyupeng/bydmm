@@ -1,4 +1,4 @@
-package ttmy.framework.core.module;
+package ttmy.framework.core.model;
 
 import java.util.List;
 
@@ -19,5 +19,7 @@ public interface IModule {
 	int getType();
 	
 	List<IModule> children();
+	
+	int getSort();
 
 }

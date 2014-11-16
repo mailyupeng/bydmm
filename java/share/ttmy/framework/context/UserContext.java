@@ -1,7 +1,7 @@
 package ttmy.framework.context;
 
 import ttmy.framework.cache.ICache;
-import ttmy.framework.core.module.IUser;
+import ttmy.framework.core.model.IUser;
 import ttmy.framework.util.BeanUtils;
 import ttmy.framework.util.SessionUtils;
 

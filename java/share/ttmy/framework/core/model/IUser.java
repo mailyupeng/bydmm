@@ -1,4 +1,4 @@
-package ttmy.framework.core.module;
+package ttmy.framework.core.model;
 
 import ttmy.framework.cache.ICache;
 import ttmy.framework.context.UserContext;
@@ -10,7 +10,7 @@ public interface IUser {
 	int ENABLE = 1;
 	int DISABLE = 2;
 
-	long getId();
+	Long getId();
 
 	default IRole getCurrentRole() {
 		ICache<Long, IRole> cache = BeanUtils.getBean("roleCache");
