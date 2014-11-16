@@ -1,15 +1,11 @@
 package ttmy.module.frameworkimpl.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import ttmy.framework.base.model.BaseEntity;
-import ttmy.framework.core.model.IModule;
 import ttmy.framework.core.model.IRole;
 
 @Entity
@@ -19,11 +15,9 @@ public class Role extends BaseEntity implements IRole {
 
 	@Column(name = "name")
 	private String name;
-	private List<IModule> authModules = new ArrayList<>();
 
 	@Id
 	@Column(name = "id")
-	@Override
 	public Long getId() {
 		return super.getId();
 	}
@@ -31,11 +25,6 @@ public class Role extends BaseEntity implements IRole {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public List<IModule> getAuthModules() {
-		return authModules;
 	}
 
 	public void setName(String name) {

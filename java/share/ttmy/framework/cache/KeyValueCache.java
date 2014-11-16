@@ -1,5 +1,6 @@
 package ttmy.framework.cache;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.cache.CacheBuilder;
@@ -37,6 +38,21 @@ abstract public class KeyValueCache<K, V> implements ICache<K, V> {
 
 	@Override
 	final public V getData(K key) {
-		return cache.getUnchecked(key);
+		try {
+			return cache.get(key);
+		} catch (ExecutionException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static void main(String[] args) {
+		KeyValueCache<String, String> c = new KeyValueCache<String, String>() {
+
+			@Override
+			protected String loadData(String key) {
+				return "a";
+			}
+		};
+		System.out.println(c.getData("aaa"));
 	}
 }

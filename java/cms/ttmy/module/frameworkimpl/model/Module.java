@@ -1,8 +1,5 @@
 package ttmy.module.frameworkimpl.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,18 +24,11 @@ public class Module extends BaseEntity implements IModule {
 	private int type;
 	@Column(name = "sort")
 	private int sort;
-	private List<IModule> children = new ArrayList<>();
 
 	@Id
 	@Column(name = "id")
-	@Override
 	public Long getId() {
 		return super.getId();
-	}
-
-	@Override
-	public void setId(Long id) {
-		super.setId(id);
 	}
 
 	@Override
@@ -59,11 +49,6 @@ public class Module extends BaseEntity implements IModule {
 	@Override
 	public int getType() {
 		return type;
-	}
-
-	@Override
-	public List<IModule> children() {
-		return children;
 	}
 
 	public void setParentId(Long parentId) {

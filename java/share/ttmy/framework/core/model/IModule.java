@@ -17,9 +17,11 @@ public interface IModule {
 	String getUrl();
 
 	int getType();
-	
-	List<IModule> children();
-	
+
+	default List<IModule> children() {
+		return null;
+	}
+
 	int getSort();
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ttmy.framework.context.UserContext;
 import ttmy.framework.core.model.IModule;
 import ttmy.framework.core.model.IRole;
+import ttmy.framework.core.model.IUser;
 
 public class AuthInterceptor implements HandlerInterceptor {
 
@@ -37,7 +38,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 		if (uncheckedURLs.contains(request.getServletPath()))
 			return true;
 		else if (UserContext.isLogin()) {
-			IRole role = UserContext.getCurrentUser().getCurrentRole();
+			IUser user = UserContext.getCurrentUser();
+			if(user.getStatus() == IUser.ROOT)
+				return true;
+			IRole role = user.getCurrentRole();
 			for (IModule module : role.getAuthModules()) {
 				if (module.getUrl() != null && module.getUrl().equals(request.getServletPath()))
 					return true;

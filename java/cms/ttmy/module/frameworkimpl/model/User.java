@@ -37,13 +37,6 @@ public class User extends BaseEntity implements IUser {
 		this.status = status;
 	}
 
-	@Id
-	@Column(name = "id")
-	@Override
-	public Long getId() {
-		return super.getId();
-	}
-
 	@Override
 	public String getName() {
 		return null;
@@ -52,6 +45,12 @@ public class User extends BaseEntity implements IUser {
 	@Override
 	public int getStatus() {
 		return 0;
+	}
+
+	@Id
+	@Column(name = "id")
+	public Long getId() {
+		return super.getId();
 	}
 
 }

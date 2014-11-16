@@ -7,7 +7,9 @@ public interface IRole {
 	Long getId();
 
 	String getName();
-	
-	List<IModule> getAuthModules() ;
+
+	default List<IModule> getAuthModules() {
+		return null;
+	}
 
 }
