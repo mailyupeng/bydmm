@@ -29,7 +29,8 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>ttmy.module.*.domain</value>
+				<value>ttmy.module.*.model</value>
+				<value>ttmy.framework.base.model</value>
 			</list>
 		</property>
 	</bean>
