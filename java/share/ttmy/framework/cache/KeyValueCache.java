@@ -33,7 +33,7 @@ abstract public class KeyValueCache<K, V> implements ICache<K, V> {
 		};
 	}
 
-	abstract public V loadData(K key);
+	abstract protected V loadData(K key);
 
 	@Override
 	final public V getData(K key) {
