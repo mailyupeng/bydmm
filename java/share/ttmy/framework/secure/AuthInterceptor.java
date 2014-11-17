@@ -49,6 +49,5 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 		response.sendRedirect("loginPage.htm");
 		return false;
-		// return true;
 	}
 }

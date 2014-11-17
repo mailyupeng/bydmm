@@ -6,17 +6,22 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import ttmy.framework.base.model.BaseEntity;
+import ttmy.framework.core.IPage;
+import ttmy.framework.core.Page;
 
 public class BaseEntityDao<E extends BaseEntity> extends HibernateDaoSupport implements IEntityDao<E> {
 
 	protected final Class<E> entityClass;
+	protected Log log = LogFactory.getLog(this.getClass());
 
 	{
 		this.entityClass = getInitEntityClass();
@@ -57,15 +62,16 @@ public class BaseEntityDao<E extends BaseEntity> extends HibernateDaoSupport imp
 		return null;
 	}
 
-	protected Log log = LogFactory.getLog(entityClass);
+	@SuppressWarnings("unchecked")
+	public List<E> findBy(DetachedCriteria detachedCriteria) {
+		return (List<E>) super.getHibernateTemplate().findByCriteria(detachedCriteria);
+	}
 
-	public List<E> findBy(final DetachedCriteria detachedCriteria) {
-		return getHibernateTemplate().execute(new HibernateCallback<List<E>>() {
-			@SuppressWarnings("unchecked")
-			public List<E> doInHibernate(Session session) throws HibernateException {
-				return (List<E>) detachedCriteria.getExecutableCriteria(session).list();
-			}
-		});
+	public E findUniqueBy(DetachedCriteria detachedCriteria) {
+		List<E> list = findBy(detachedCriteria);
+		if (list.size() > 0)
+			return list.get(0);
+		return null;
 	}
 
 	public List<E> findAll() {
@@ -79,5 +85,24 @@ public class BaseEntityDao<E extends BaseEntity> extends HibernateDaoSupport imp
 
 	public E findById(Long id) {
 		return super.getHibernateTemplate().get(this.entityClass, id);
+	}
+
+	public IPage<E> findPageBy(DetachedCriteria detachedCriteria, final int pageSize, final int pageIndex) {
+		return super.getHibernateTemplate().execute(new HibernateCallback<IPage<E>>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public IPage<E> doInHibernate(Session session) throws HibernateException {
+				Criteria criteria = detachedCriteria.getExecutableCriteria(session);
+				int rowCount = (Integer) criteria.setProjection(  
+		                Projections.rowCount()).uniqueResult();  
+		        criteria.setProjection(null);  
+		  
+		        criteria.setFirstResult((pageIndex - 1) * pageSize);  
+		        criteria.setMaxResults(pageSize);  
+		  
+		        List<E> result = criteria.list();  
+				return new Page(result, rowCount, pageSize, pageIndex);
+			}
+		});
 	}
 }
