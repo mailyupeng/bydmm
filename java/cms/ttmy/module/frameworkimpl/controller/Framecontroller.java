@@ -18,7 +18,7 @@ import ttmy.module.frameworkimpl.model.User;
 import ttmy.module.frameworkimpl.service.IFrameService;
 
 @Controller
-public class FrameController extends BaseController {
+public class Framecontroller extends BaseController {
 
 	@RequestMapping("loginPage.htm")
 	public String toLogin() {
