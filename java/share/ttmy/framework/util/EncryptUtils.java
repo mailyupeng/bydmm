@@ -22,7 +22,7 @@ public class EncryptUtils {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(md5Encoder("devusera"));
+		System.out.println(md5Encoder("admin"+"asdf123!@#"));
 	}
 
 }

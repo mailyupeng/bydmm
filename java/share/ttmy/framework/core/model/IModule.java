@@ -10,18 +10,24 @@ public interface IModule {
 
 	Long getId();
 
-	Long getParentId();
+	default Long getParentId() {
+		return null;
+	};
 
 	String getName();
 
 	String getUrl();
 
-	int getType();
+	default int getType() {
+		return 1;
+	};
 
 	default List<IModule> children() {
 		return null;
 	}
 
-	int getSort();
+	default int getSort() {
+		return 0;
+	};
 
 }

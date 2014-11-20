@@ -1,5 +1,6 @@
 package ttmy.framework.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IRole {
@@ -9,7 +10,7 @@ public interface IRole {
 	String getName();
 
 	default List<IModule> getAuthModules() {
-		return null;
+		return new ArrayList<IModule>();
 	}
 
 }
